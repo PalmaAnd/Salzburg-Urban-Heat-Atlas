@@ -1,0 +1,14 @@
+
+fastapi
+uvicorn
+sqlalchemy
+geoalchemy2
+psycopg2-binary
+pydantic
+python-dotenv
+geopandas
+shapely
+rasterio
+numpy
+pandas
+

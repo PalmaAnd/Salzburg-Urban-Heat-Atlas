@@ -1,0 +1,38 @@
+
+
+# Python
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+
+# Node
+
+node_modules/
+dist/
+
+
+# Data
+
+data/raw/*
+data/cache/*
+
+
+# IDE
+
+.vscode/
+.idea/
+
+
+# OS
+
+.DS_Store
+
+
+# Database
+
+*.sqlite
+
+
