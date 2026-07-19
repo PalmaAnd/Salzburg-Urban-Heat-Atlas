@@ -190,18 +190,27 @@ Visualization
 
 ## Data Sources
 
-Planned public datasets include:
+The following publicly available sources can support the first project phases:
 
-- OpenStreetMap
-- Copernicus Programme
-- Sentinel satellites
-- Salzburg Open Data Portal
-- Austrian Government Open Data
-- Open-Meteo
-- ESA datasets
+| Source | Data type | Potential use in this project |
+|---|---|---|
+| OpenStreetMap | Buildings, roads, land use, water, points of interest | Base map layers, urban morphology indicators, walkability context |
+| Copernicus Sentinel-2 (L2A) | Multispectral satellite imagery (10–20m) | NDVI/vegetation, surface material proxies, seasonal change detection |
+| Copernicus Sentinel-3 (LST products) | Land Surface Temperature products | Regional temperature context and hotspot screening |
+| Copernicus Land Monitoring Service (CLMS) | Imperviousness, tree cover density, land cover products | Urban heat driver analysis (sealed surfaces vs. vegetation) |
+| Salzburg Open Data (city/state portals) | Tree cadastre, green spaces, water features, planning layers (where available) | Local high-resolution urban context and intervention planning |
+| data.gv.at (Austrian open data) | National geodata catalogs, administrative and environmental layers | Additional Austrian reference layers and metadata discovery |
+| Open-Meteo / DWD open weather APIs | Historical and forecast meteorological time series | Air temperature and humidity context for heat index interpretation |
+| GeoSphere Austria (ZAMG) open resources | Austrian meteorological and climate datasets | Ground-truth weather observations and climate baselines |
+
+Selection criteria for ingestion:
+
+- Salzburg or Austria-wide coverage with usable local resolution
+- Open and reusable licensing
+- Stable update cadence and documented metadata
+- Prefer machine-readable formats (GeoJSON, CSV, COG/GeoTIFF, NetCDF, API)
 
 Each dataset will remain under its original license.
-
 The project does **not** claim ownership of external datasets.
 
 ---
