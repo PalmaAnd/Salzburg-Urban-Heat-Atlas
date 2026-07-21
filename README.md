@@ -190,19 +190,70 @@ Visualization
 
 ## Data Sources
 
-Planned public datasets include:
+The following publicly available sources can support the first project phases:
 
-- OpenStreetMap
-- Copernicus Programme
-- Sentinel satellites
-- Salzburg Open Data Portal
-- Austrian Government Open Data
-- Open-Meteo
-- ESA datasets
+| Source | Data type | Potential use in this project |
+|---|---|---|
+| OpenStreetMap | Buildings, roads, land use, water, points of interest | Base map layers, urban morphology indicators, walkability context |
+| Copernicus Sentinel-2 (L2A) | Multispectral satellite imagery (10–20m) | NDVI/vegetation, surface material proxies, seasonal change detection |
+| Copernicus Sentinel-3 (LST products) | Land Surface Temperature products | Regional temperature context and hotspot screening |
+| Copernicus Land Monitoring Service (CLMS) | Imperviousness, tree cover density, land cover products | Urban heat driver analysis (sealed surfaces vs. vegetation) |
+| Salzburg Open Data (city/state portals) | Tree cadastre, green spaces, water features, planning layers (where available) | Local high-resolution urban context and intervention planning |
+| data.gv.at (Austrian open data) | National geodata catalogs, administrative and environmental layers | Additional Austrian reference layers and metadata discovery |
+| Open-Meteo / DWD open weather APIs | Historical and forecast meteorological time series | Air temperature and humidity context for heat index interpretation |
+| GeoSphere Austria (ZAMG) open resources | Austrian meteorological and climate datasets | Ground-truth weather observations and climate baselines |
+
+Selection criteria for ingestion:
+
+- Salzburg or Austria-wide coverage with usable local resolution
+- Open and reusable licensing
+- Stable update cadence and documented metadata
+- Prefer machine-readable formats (GeoJSON, CSV, COG/GeoTIFF, NetCDF, API)
 
 Each dataset will remain under its original license.
-
 The project does **not** claim ownership of external datasets.
+
+### Suggested dataset additions (high-value)
+
+- **EU-DEM / Copernicus DEM**: elevation and slope context for airflow and cold-air drainage patterns.
+- **CORINE / Urban Atlas land cover**: standardized land-cover classes for cross-district comparisons.
+- **High-resolution orthoimagery (where open)**: visual validation of tree canopy and sealed surfaces.
+- **Salzburg zoning and planning layers (where available)**: feasibility context for mitigation actions.
+- **Public transport and mobility data (GTFS, cycling network)**: supports heat-aware routing and access analysis.
+
+### Proposed API endpoints (MVP-oriented)
+
+The project can start with a small, stable read API and expand by phase:
+
+| Endpoint | Purpose | Phase |
+|---|---|---|
+| `GET /api/v1/health` | Service status check | 1 |
+| `GET /api/v1/layers` | List available map layers and metadata | 1 |
+| `GET /api/v1/layers/{layer_id}` | Layer details (source, timestamp, license, schema) | 1 |
+| `GET /api/v1/map/tiles/{layer}/{z}/{x}/{y}` | Tile delivery for map visualization | 1 |
+| `GET /api/v1/heat/hotspots?bbox=...` | Heat hotspot polygons/points within area | 2 |
+| `GET /api/v1/heat/timeseries?lat=...&lon=...` | Time-based heat and weather profile at location | 2 |
+| `GET /api/v1/neighborhoods/{id}/stats` | Aggregated district indicators (heat, green, sealed area) | 4 |
+| `POST /api/v1/routes/coolest` | Heat-aware route between two points | 5 |
+| `GET /api/v1/methodology` | Scoring and model assumptions for transparency | 2 |
+
+### Quick feasibility analysis (based on currently identified data)
+
+**Overall doability: high for an MVP, medium for advanced analytics.**
+
+**Why MVP is feasible now**
+- Core geometry and context layers are already available from OSM and Austrian/Salzburg open data portals.
+- Public weather APIs and Copernicus products provide enough temporal and thermal context for first heat maps.
+- Planned stack (FastAPI + PostGIS + Geo stack) is appropriate for this data type and scale.
+
+**Main constraints**
+- Spatial resolution mismatch (e.g., Sentinel vs. street-level needs) can reduce local precision.
+- Licensing and update cadence vary by provider and require explicit metadata tracking.
+- Ground-truth validation depends on availability and quality of local station observations.
+
+**Practical conclusion**
+- Phase 1–2 features are very achievable with public data and moderate engineering effort.
+- Phase 3–5 features are feasible but depend on stronger local datasets, calibration, and robust preprocessing pipelines.
 
 ---
 
