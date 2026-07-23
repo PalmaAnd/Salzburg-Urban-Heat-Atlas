@@ -270,6 +270,7 @@ assets/
 ```
 
 Additional documentation is maintained in the Wiki.
+Backend local setup is documented in `/backend/README.md`.
 
 ---
 
