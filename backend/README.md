@@ -68,3 +68,4 @@ This starts:
 
 - PostGIS database on `localhost:5432`
 - FastAPI backend on `http://localhost:8000`
+- Next.js frontend on `http://localhost:3000`

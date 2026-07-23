@@ -23,6 +23,18 @@ services:
     depends_on:
       - database
 
+  frontend:
+    build:
+      context: ./frontend
+    container_name: suha-frontend
+    command: npm run dev -- --hostname 0.0.0.0 --port 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
 
 volumes:
 
