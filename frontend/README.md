@@ -27,6 +27,16 @@ npm run build
 npm run start
 ```
 
+## Docker
+
+From the repository root, run the full stack:
+
+```bash
+docker compose up --build
+```
+
+Frontend is available at [http://localhost:3000](http://localhost:3000).
+
 ## Initial layout
 
 The initial page provides:

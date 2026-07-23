@@ -55,3 +55,17 @@ Then open:
 
 - API root: `http://127.0.0.1:8000/`
 - Swagger UI: `http://127.0.0.1:8000/docs`
+
+## 5) Run with Docker Compose
+
+From the repository root:
+
+```bash
+docker compose up --build
+```
+
+This starts:
+
+- PostGIS database on `localhost:5432`
+- FastAPI backend on `http://localhost:8000`
+- Next.js frontend on `http://localhost:3000`
